@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
 
 class SendEmailController extends Controller
 {
     function index(){
-        return view('sendemail');
+        return view('main.sendemail');
     }
 
     function send(Request $request)

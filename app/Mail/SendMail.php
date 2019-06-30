@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendMail extends Mailable
 {
@@ -30,7 +29,7 @@ class SendMail extends Mailable
     {
         return $this->from('seanphilipcruz@gmail.com')
             ->subject('New Customer Equiry')
-            ->view('dynamic_email_template')
+            ->view('main.dynamic_email_template')
             ->with('data', $this->data);
     }
 }
