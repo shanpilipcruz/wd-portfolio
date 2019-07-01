@@ -3,7 +3,7 @@
 @section('content')
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            {{ session('message') }}
+            {{ session('success') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -41,7 +41,7 @@
                 @endif
                         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-lg-3">
                             <div class="card mb-4 shadow-sm">
-                                <img src="{{ URL::to('/') }}/images/project_images/{{ $projects->ProjectImage }}" class="img-fluid rounded" style="max-width: 100%; height: auto;" alt="{{ $projects->ProjectImage }}">
+                                <img src="{{ URL::to('/') }}/images/project_images/{{ $projects->ProjectImage }}" class="card-img-top img-responsive" style="max-width: 100%;" alt="{{ $projects->ProjectImage }}">
                                 <div class="card-body">
                                     <h3 class="card-title">{{ $projects->ProjectName }}</h3>
                                     <p class="card-text">{{ $projects->ProjectDescription }}</p>
