@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\CMS;
 use App\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,8 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data = Dashboard::all();
-        return view('cms.index', compact('data'));
+        $data = Dashboard::latest()->paginate(5);
+        return view('cms.index', compact('data'))
+            ->with('i', (request()->input('page',1) - 1) * 5);
     }
 
     /**
@@ -39,36 +39,36 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'projectName' => 'required',
-            'projectDescription' => 'required',
-            'projectAuthor' => 'required',
-            'projectImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'ProjectName' => 'required',
+            'ProjectDescription' => 'required',
+            'ProjectAuthor' => 'required',
+            'ProjectImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $image = $request->file('image');
+        $image = $request->file('ProjectImage');
 
-        $newName = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('img'), $newName);
+        $newName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images/project_images'), $newName);
         $formData = array(
-            'projectName' => $request->ProjectName,
-            'projectDescription' => $request->ProjectDescription,
-            'projectAuthor' => $request->ProjectAuthor,
-            'projectImage' => $newName
+            'ProjectName' => $request->ProjectName,
+            'ProjectDescription' => $request->ProjectDescription,
+            'ProjectAuthor' => $request->ProjectAuthor,
+            'ProjectImage' => $newName
         );
 
-        CMS::create($formData);
+        Dashboard::create($formData);
 
-        return redirect()->route('cms.index')
+        return redirect()->route('dashboard.index')
             ->with('success','Project Added Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  CMS  $cMS
+     * @param  Dashboard $dashboard
      * @return Response
      */
-    public function show(Data $data)
+    public function show($id)
     {
         //
     }
@@ -76,7 +76,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  CMS  $cMS
+     * @param  Dashboard $dashboard
      * @return Response
      */
     public function edit(Dashboard $dashboard)
@@ -88,47 +88,57 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  CMS  $cMS
+     * @param  Dashboard $dashboard
      * @return Response
      */
     public function update(Request $request, $id)
     {
-        $imageName =$request->hiddenImage;
-        $image = $request->file('image');
-        if($image != ''){
+        $image_name = $request->hidden_image;
+        $image = $request->file('ProjectImage');
+        if($image != '')
+        {
             $request->validate([
-               'projectName' => 'required',
-                'projectDescription' => 'required',
-                'projectAuthor' => 'required',
-                'projectImage' => 'required|image|mimes:jpeg,jpg,png|max:2048'
+                'ProjectName' => 'required',
+                'ProjectDescription' => 'required',
+                'ProjectAuthor' => 'required',
+                'ProjectImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
-            $imageName = rand() . "." . $image->getClientOriginalExtension();
-            $image->move(public_path('img'),$imageName);
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/project_images/'), $image_name);
+        } else if($request->get('ProjectName') == $request->get('ProjectName')
+            && $request->get('ProjectDescription') == $request->get('ProjectDescription')
+            && $request->get('ProjectAuthor') == $request->get('ProjectAuthor')
+            && $request->get('ProjectImage') == $request->get('ProjectImage')) {
+            return redirect()->back()->with('success', 'No changes were Made!');
         } else {
+            $ProjectImage = Dashboard::table('dashboards')->select('ProjectImage')->where('id', $id);
             $request->validate([
-               'projectName' => 'required',
-               'projectDescription' => 'required'
+                'ProjectName' => 'required',
+                'ProjectDescription' => 'required',
+                'ProjectAuthor' => 'required',
             ]);
+            $image_name = $ProjectImage;
         }
 
-        $formData = array(
-            'projectName' => $request->ProjectName,
-            'projectDesciption' => $request->ProjectDescription,
-            'projectAuthor' => $request->ProjectAuthor,
-            'projectImage' => $imageName
+        $form_data = array(
+            'ProjectName'  =>   $request->ProjectName,
+            'ProjectDescription'  =>   $request->ProjectDescription,
+            'ProjectAuthor'  =>   $request->ProjectAuthor,
+            'ProjectImage'  =>   $image_name
         );
 
-        CMS::whereId($id)->update($formData);
+        Dashboard::whereId($id)->update($form_data);
 
-        return redirect()->route('cms.index')
+        return redirect()
+            ->back()
             ->with('success','Project updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  CMS  $cMS
+     * @param  Dashboard  $dashboard
      * @return Response
      */
     public function destroy(Dashboard $dashboard)

@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/album.css') }}">
 
     <style>
         .bd-placeholder-img {

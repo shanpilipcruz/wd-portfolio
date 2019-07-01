@@ -9,7 +9,7 @@ class Dashboard extends Model
     protected $fillable = [
         'ProjectName',
         'ProjectDescription',
-        'ProjectImage',
-        'ProjectAuthor'
+        'ProjectAuthor',
+        'ProjectImage'
     ];
 }

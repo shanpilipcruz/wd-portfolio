@@ -21,7 +21,4 @@ Route::post('/sendemail/send', 'SendEmailController@send');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/cms','DashboardController@index');
-Route::get('/cms/create','DashboardController@create');
-Route::get('/cms/{id}','DashboardController@edit');
 Route::resource('/dashboard','DashboardController');

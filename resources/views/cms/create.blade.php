@@ -1,6 +1,16 @@
 @extends('layouts.dashboard');
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="modal-content mt-5">
         <div class="modal-header">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
@@ -16,7 +26,7 @@
                     <i class="fas fa-folder"></i>
                 </span>
                     </div>
-                    <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" required aria-label="projectName">
+                    <input type="text" class="form-control" id="ProjectName" name="ProjectName" placeholder="Project Name" required aria-label="projectName">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -24,7 +34,7 @@
                     <i class="fas fa-list-alt"></i>
                 </span>
                     </div>
-                    <textarea type="text" class="form-control" id="projectDescription" name="projectDescription" placeholder="Description" required aria-label="projectDescription"></textarea>
+                    <textarea type="text" class="form-control" id="ProjectDescription" name="ProjectDescription" placeholder="Description" required aria-label="projectDescription"></textarea>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -32,9 +42,9 @@
                     <i class="fas fa-user"></i>
                 </span>
                     </div>
-                    <input type="text" class="form-control" id="projectAuthor" name="projectAuthor" placeholder="Author" required aria-label="projectAuthor">
+                    <input type="text" class="form-control" id="ProjectAuthor" name="ProjectAuthor" placeholder="Author" required aria-label="projectAuthor">
                 </div>
-                <input type="file" class="form-control-file" id="projectImage" name="projectImage" required accept="*image/">
+                <input type="file" class="form-control-file" id="ProjectImage" name="ProjectImage" required>
         </div>
         <div class="modal-footer">
                 <button type="submit" class="btn btn-outline-secondary fa-pull-left">Save</button>

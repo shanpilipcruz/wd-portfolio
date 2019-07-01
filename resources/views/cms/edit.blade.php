@@ -1,6 +1,24 @@
 @extends('layouts.dashboard');
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger mt-3">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            {{ session('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="modal-content mt-5">
         <div class="modal-header">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
@@ -8,16 +26,19 @@
             </div>
         </div>
         <div class="modal-body">
-            <img src="{{ URL::to('/') }}/images/project_images/{{ $dashboard->ProjectImage }}" class="img-thumbnail" alt="{{ $dashboard->ProjectImage }}" height="250" width="250">
-            <form action="{{ route('dashboard.store') }}" method="POST" enctype="multipart/form-data">
+            <center>
+                <img src="{{ URL::to('/') }}/images/project_images/{{ $dashboard->ProjectImage }}" class="img-fluid img-thumbnail rounded" style="max-width: 75%; height: auto;" alt="{{ $dashboard->ProjectImage }}">
+            </center>
+            <form action="{{ route('dashboard.update', $dashboard->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="input-group mb-3 mt-3">
                     <div class="input-group-prepend">
                 <span class="input-group-text">
                     <i class="fas fa-folder"></i>
                 </span>
                     </div>
-                    <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" required aria-label="projectName" value="{{ $dashboard->ProjectName }}">
+                    <input type="text" class="form-control" id="ProjectName" name="ProjectName" placeholder="Project Name" required aria-label="projectName" value="{{ $dashboard->ProjectName }}" autofocus>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -25,9 +46,7 @@
                     <i class="fas fa-list-alt"></i>
                 </span>
                     </div>
-                    <textarea type="text" class="form-control" id="projectDescription" name="projectDescription" placeholder="Description" required aria-label="projectDescription">
-                        {{ $dashboard->ProjectDescription }}
-                    </textarea>
+                    <textarea type="text" class="form-control" id="ProjectDescription" name="ProjectDescription" placeholder="Description" required aria-label="projectDescription">{{ $dashboard->ProjectDescription }}</textarea>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -35,9 +54,14 @@
                     <i class="fas fa-user"></i>
                 </span>
                     </div>
-                    <input type="text" class="form-control" id="projectAuthor" name="projectAuthor" placeholder="Author" required aria-label="projectAuthor" value="{{ $dashboard->ProjectAuthor }}">
+                    <input type="text" class="form-control" id="ProjectAuthor" name="ProjectAuthor" placeholder="Author" required aria-label="projectAuthor" value="{{ $dashboard->ProjectAuthor }}">
                 </div>
-                <input type="file" class="form-control-file" id="projectImage" name="projectImage" required accept="*image/">
+                <div class="input-group mt-3">
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="ProjectImage">Choose File</label>s
+                        <input type="file" class="custom-file-input" id="ProjectImage" name="ProjectImage">
+                    </div>
+                </div>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-outline-secondary fa-pull-left">Save</button>
