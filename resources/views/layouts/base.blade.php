@@ -28,6 +28,31 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
+
+            .flat {
+                font-weight: 300;
+            }
+
+            .form-group-floating {
+                position: relative;
+                margin-bottom: 1.5rem;
+            }
+
+            .form-control-placeholder-floating {
+                position: absolute;
+                top: 0;
+                padding: 7px 0 0 13px;
+                transition: all 200ms;
+                opacity: 0.5;
+            }
+
+            .form-control:focus + .form-control-placeholder-floating,
+            .form-control:valid + .form-control-placeholder-floating {
+                font-size: 75%;
+                transform: translate3d(0, -100%, 0);
+                opacity: 1;
+            }
+
         </style>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/album.css') }}">
@@ -41,7 +66,10 @@
             <div class="col-sm-8 col-md-7 py-4">
                 <h4 class="text-white">About</h4>
                 <p class="text-muted">
-                    Hi I'm Sean Philip Cruz, a freelance developer based in Manila, Philippines. <br>I am quite flexible regarding on developing softwares, I can develop web and <br>with assistance mobile app. You need my service? contact me in the links.
+                    Hi I'm Sean Philip Cruz, a freelance developer based in Manila, Philippines. <br>
+                    I am quite flexible regarding on developing variety of software, I can develop <br>
+                    web and with assistance mobile app. You need my service? contact me in the <br>
+                    links or send me an email. <br>
                 </p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
@@ -61,21 +89,43 @@
         <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center">
             <img src="{{ asset('images/Icon-brand.png') }}" width="30px"/>
         </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        @if(url()->current() == "http://localhost:8000/login" && Route::has('register'))
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            </ul>
+        @elseif(url()->current() == "http://localhost:8000/register" && Route::has('login'))
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+            </ul>
+        @else
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        @endif
     </div>
 </nav>
     <header>
         @yield('main')
     </header>
-<footer class="text-muted">
+<footer class="text-muted @if(url()->current() == "http://localhost:8000/login" || url()->current() == "http://localhost:8000/sendemail") fixed-bottom @else @endif">
     <div class="container">
         <p class="float-right">
-            <a href="#">Back to top</a>
+            @if(url()->current() == "http://localhost:8000/login" || url()->current() == "http://localhost:8000/sendemail" || url()->current() == "http://localhost:8000/register")
+
+            @else
+                <a href="#">Back to top</a>
+            @endif
         </p>
-        <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
+        @if(url()->current() == "http://localhost:8000/register")
+
+        @else
+            <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+            <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
+        @endif
     </div>
 </footer>
     <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>

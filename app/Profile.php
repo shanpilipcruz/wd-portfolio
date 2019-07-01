@@ -12,6 +12,7 @@ class Profile extends Model
         'last_name',
         'role',
         'username',
+        'password',
         'email',
         'contact_number',
         'address',
