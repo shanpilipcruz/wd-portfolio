@@ -51,7 +51,7 @@
                         <li class="navbar-nav px-3">
                             <a href="{{ action('UserProfileController@show', $user) }}" class="nav-link flat">
                                 <span class="sr-only">(current)</span>
-                                Hi! {{ Auth::user()->first_name }}
+                                <img src="{{ url('/') }}/images/profile_images/{{ $user->profile_img }}" alt="{{ $user->profile_img }}" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->first_name }}
                             </a>
                         </li>
                     @endif

@@ -72,9 +72,15 @@
                 </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-outline-secondary fa-pull-left">Save</button>
+            <button type="submit" class="btn btn-outline-secondary fa-pull-left">
+                <i class="fa fa-save"></i>
+                Save
+            </button>
             </form>
-            <a href="{{ action('DashboardController@index') }}" class="btn btn-outline-secondary fa-pull-right">Back</a>
+            <a href="{{ action('DashboardController@index') }}" class="btn btn-outline-secondary fa-pull-right">
+                <i class="fa fa-backspace"></i>
+                Back
+            </a>
         </div>
     </div>
 @endsection
