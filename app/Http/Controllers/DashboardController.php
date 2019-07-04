@@ -21,7 +21,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $dashboard = Dashboard::latest()->paginate(5);
+        $dashboard = Dashboard::latest()->paginate(8);
 
         $data = array('user' => $user, 'dashboard' => $dashboard);
 

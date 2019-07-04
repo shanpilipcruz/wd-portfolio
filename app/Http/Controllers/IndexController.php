@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ProfileController extends Controller
+class IndexController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +15,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $data = Dashboard::latest()->paginate(9);
+        return view('index', compact('data'));
     }
 
     /**
@@ -48,10 +43,10 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Profile $profile
+     * @param Dashboard $dashboard
      * @return Response
      */
-    public function show(User $user)
+    public function show(Dashboard $dashboard)
     {
         return view('profile.show', compact('user'));
     }
@@ -59,10 +54,10 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Profile $profile
+     * @param  Dashboard $dashboard
      * @return Response
      */
-    public function edit(User $user)
+    public function edit(Dashboard $dashboard)
     {
         //
     }
@@ -71,10 +66,10 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Profile $profile
+     * @param Dashboard $dashboard
      * @return Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Dashboard $dashboard)
     {
         //
     }
@@ -82,10 +77,10 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Profile $profile
+     * @param Dashboard $dashboard
      * @return Response
      */
-    public function destroy(User $user)
+    public function destroy(Dashboard $dashboard)
     {
         //
     }

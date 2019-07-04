@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dashboard;
 use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -9,7 +10,8 @@ use Illuminate\Support\Facades\Mail;
 class SendEmailController extends Controller
 {
     function index(){
-        return view('main.sendemail');
+        $data = Dashboard::latest()->paginate(9);
+        return view('main.sendemail', compact('data'));
     }
 
     function send(Request $request)
