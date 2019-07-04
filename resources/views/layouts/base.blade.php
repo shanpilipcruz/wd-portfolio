@@ -28,35 +28,11 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
-            .flat {
-                font-weight: 300;
-            }
-
-            .form-group-floating {
-                position: relative;
-                margin-bottom: 1.5rem;
-            }
-
-            .form-control-placeholder-floating {
-                position: absolute;
-                top: 0;
-                padding: 7px 0 0 13px;
-                transition: all 200ms;
-                opacity: 0.5;
-            }
-
-            .form-control:focus + .form-control-placeholder-floating,
-            .form-control:valid + .form-control-placeholder-floating {
-                font-size: 75%;
-                transform: translate3d(0, -100%, 0);
-                opacity: 1;
-            }
-
         </style>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/album.css') }}">
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
         <title>Sean Philip Cruz - Information Technology Specialist</title>
     </head>
 <body>

@@ -20,7 +20,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data = Dashboard::latest()->paginate(5);
+        $user = auth()->user();
+        $dashboard = Dashboard::latest()->paginate(5);
+
+        $data = array('user' => $user, 'dashboard' => $dashboard);
+
         return view('cms.index', compact('data'))
             ->with('i', (request()->input('page',1) - 1) * 5);
     }
@@ -73,9 +77,9 @@ class DashboardController extends Controller
      * @param  Dashboard $dashboard
      * @return Response
      */
-    public function show($id)
+    public function show(Dashboard $dashboard)
     {
-        //
+        return view('cms.show', compact('dashboard'));
     }
 
     /**
@@ -115,7 +119,7 @@ class DashboardController extends Controller
             && $request->get('ProjectDescription') == $request->get('ProjectDescription')
             && $request->get('ProjectAuthor') == $request->get('ProjectAuthor')
             && $request->get('ProjectImage') == $request->get('ProjectImage')) {
-            return redirect()->back()->with('success', 'No changes were Made!');
+            return redirect()->back()->with('warning', 'No changes were Made!');
         } else {
             $ProjectImage = Dashboard::table('dashboards')->select('ProjectImage')->where('id', $id);
             $request->validate([

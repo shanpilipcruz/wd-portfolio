@@ -63,10 +63,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $role = 1; // automatic for new users to have the basic role. "Manage their projects"
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $role
         ]);
     }
 }

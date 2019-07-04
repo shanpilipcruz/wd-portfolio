@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -15,8 +14,22 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function dashboard()
+    {
+        return $this->belongsTo('App/Dashboard');
+    }
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'email',
+        'password',
+        'role',
+        'profile_img',
+        'address',
+        'description',
+        'contact_number'
     ];
 
     /**

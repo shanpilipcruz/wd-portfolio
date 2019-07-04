@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -51,9 +51,9 @@ class ProfileController extends Controller
      * @param Profile $profile
      * @return Response
      */
-    public function show(Profile $profile)
+    public function show(User $user)
     {
-        //
+        return view('profile.show', compact('user'));
     }
 
     /**
@@ -62,7 +62,7 @@ class ProfileController extends Controller
      * @param Profile $profile
      * @return Response
      */
-    public function edit(Profile $profile)
+    public function edit(User $user)
     {
         //
     }
@@ -74,7 +74,7 @@ class ProfileController extends Controller
      * @param Profile $profile
      * @return Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -85,7 +85,7 @@ class ProfileController extends Controller
      * @param Profile $profile
      * @return Response
      */
-    public function destroy(Profile $profile)
+    public function destroy(User $user)
     {
         //
     }

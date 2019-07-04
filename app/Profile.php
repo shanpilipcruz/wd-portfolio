@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+
+    public function User()
+    {
+        return $this->hasMany('App/User');
+    }
+
     protected $fillable = [
         'first_name',
         'middle_name',

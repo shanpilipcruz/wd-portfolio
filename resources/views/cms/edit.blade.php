@@ -19,6 +19,14 @@
             </button>
         </div>
     @endif
+    @if (session('warning'))
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            {{ session('warning') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="modal-content mt-5">
         <div class="modal-header">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">

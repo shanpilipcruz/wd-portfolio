@@ -22,20 +22,23 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
         <h1 class="h2 flat">Dashboard</h1>
         <div class="btn-toolbar">
-            <a href="{{ action('DashboardController@create') }}" class="btn btn-sm btn-outline-secondary">Create</a>
+            <a href="{{ action('DashboardController@create') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fa fa-plus mr-1"></i>
+                Create
+            </a>
         </div>
     </div>
     <form method="POST">
         @csrf
-        <div class="form-label-group mb-3">
-            <input id="search" class="form-control form-control-lg" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
-            <label for="search">Search</label>
+        <div class="form-group-floating">
+            <input id="search" type="text" class="form-control" name="search" required autocomplete="search" autofocus>
+            <label for="search" class="form-control-placeholder-floating flat">Search</label>
         </div>
     </form>
     <div class="album py-5 bg-light">
         <div class="container">
             <?php $count = 1;?>
-            @forelse($data as $projects)
+            @forelse($data['dashboard'] as $key => $projects)
                 @if($count%4 == 1)
                     <div class="row">
                 @endif
@@ -44,14 +47,22 @@
                                 <img src="{{ URL::to('/') }}/images/project_images/{{ $projects->ProjectImage }}" class="card-img-top img-responsive" style="max-width: 100%;" alt="{{ $projects->ProjectImage }}">
                                 <div class="card-body">
                                     <h3 class="card-title">{{ $projects->ProjectName }}</h3>
-                                    <p class="card-text">{{ $projects->ProjectDescription }}</p>
+                                    <p class="card-text">
+                                        {{ $projects->ProjectDescription }}
+                                    </p>
                                     <hr>
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Date Created:&nbsp;{{ $projects->updated_at }}</small>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
                                         <div class="btn-group">
-                                            <a href="{{ route('dashboard.edit', $projects->id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                            <a href="{{ route('dashboard.destroy', $projects->id) }}" class="btn btn-sm btn-outline-secondary">Delete</a>
+                                            <a href="{{ route('dashboard.edit', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fa fa-edit"></i>
+                                                Edit
+                                            </a>
+                                            <a href="{{ route('dashboard.destroy', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fa fa-trash"></i>
+                                                Delete
+                                            </a>
                                         </div>
-                                        <small class="text-muted ml-3">{{ $projects->updated_at }}</small>
                                     </div>
                                 </div>
                             </div>
