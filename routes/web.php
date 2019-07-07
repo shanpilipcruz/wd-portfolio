@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/dashboard','DashboardController');
 Route::resource('/profile', 'UserProfileController',
     ['except' => ['index', 'store', 'delete', 'edit']]);
+Route::get('/users', 'DashboardController@showUsers');

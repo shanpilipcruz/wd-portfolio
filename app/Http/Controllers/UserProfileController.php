@@ -125,11 +125,14 @@ class UserProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param  int  $id
      * @return Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->back()->with('success','User Profile has been Deleted!');
     }
 }

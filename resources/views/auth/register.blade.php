@@ -44,7 +44,7 @@
 
                                 <div class="col-md-12 mb-3">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                    <label for="email" class="form-control-placeholder-floating flat">{{ __('E-Mail Address') }}</label>
+                                    <label for="email" class="form-control-placeholder-floating flat">{{ __('Email') }}</label>
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-outline-secondary fa-pull-right">
+                                <button type="submit" class="btn btn-outline-secondary">
                                     {{ __('Register') }}
                                 </button>
                             </div>

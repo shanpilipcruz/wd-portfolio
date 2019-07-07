@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -144,17 +145,17 @@ class DashboardController extends Controller
             ->with('success','Project updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Dashboard  $dashboard
-     * @return Response
-     */
     public function destroy(Dashboard $dashboard)
     {
         $dashboard->delete();
 
         return redirect()->route('cms.index')
             ->with('success','Project has been Deleted');
+    }
+
+    public function showUsers()
+    {
+        $data = DB::table('users')->orderBy('id', 'asc')->get();
+        return view('cms.users', compact('data'));
     }
 }
