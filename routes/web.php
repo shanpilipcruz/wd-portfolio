@@ -11,12 +11,11 @@
 |
 */
 
+Auth::routes(['verify' => true]);
 Route::get('/', 'IndexController@index');
 
 Route::get('/sendemail', 'SendEmailController@index');
 Route::post('/sendemail/send', 'SendEmailController@send');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/dashboard','DashboardController');

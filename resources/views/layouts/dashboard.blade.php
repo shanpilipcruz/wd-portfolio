@@ -50,7 +50,11 @@
                         <li class="navbar-nav px-3">
                             <a href="{{ action('UserProfileController@show', $user) }}" class="nav-link flat">
                                 <span class="sr-only">(current)</span>
-                                <img src="{{ url('/') }}/images/profile_images/{{ $user->profile_img }}" alt="{{ $user->profile_img }}" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->first_name }}
+                                @if($user->profile_img === null)
+                                    <img src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->first_name }}
+                                @else
+                                    <img src="{{ url('/') }}/images/profile_images/{{ $user->profile_img }}" alt="{{ $user->profile_img }}" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->first_name }}
+                                @endif
                             </a>
                         </li>
                     @endif
@@ -66,12 +70,16 @@
                             Create
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('DashboardController@showUsers') }}">
-                            <i class="fa fa-user mr-2"></i>
-                            Users
-                        </a>
-                    </li>
+                    @if($user->role == 1)
+
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ action('DashboardController@showUsers') }}">
+                                <i class="fa fa-user mr-2"></i>
+                                Users
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -95,8 +103,8 @@
 <script src="{{ asset('js/jquery.inputmask.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/customScripts.js') }}"></script>
 <script src="{{ asset('js/all.min.js') }}"></script>
 <script src="{{ asset('js/inputmask.js') }}"></script>
-<script src="{{ asset('js/customScripts.js') }}"></script>
 </body>
 </html>

@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>--}}
-                @foreach($data as $projects)
+                @forelse($data as $key => $projects)
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
                             <img src="{{ url('/') }}/images/project_images/{{ $projects->ProjectImage }}" width="100%" height="100%" style="max-height: 600px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
@@ -45,7 +45,13 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-md-12">
+                        <div class="alert alert-warning" role="alert">
+                            <center>No Data to be Displayed!</center>
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>

@@ -77,6 +77,20 @@
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
             </ul>
+        @elseif(url()->current() == "http://localhost:8000/email/verify")
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
         @else
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -87,21 +101,15 @@
     <header>
         @yield('main')
     </header>
-<footer class="text-muted @if(url()->current() == "http://localhost:8000/login" || url()->current() == "http://localhost:8000/sendemail") fixed-bottom @else @endif">
+<footer class="text-muted @if(url()->current() == "http://localhost:8000/login" || url()->current() == "http://localhost:8000/sendemail" || url()->current() == "http://localhost:8000/email/verify") fixed-bottom @else @endif">
     <div class="container">
         <p class="float-right">
-            @if(url()->current() == "http://localhost:8000/login" || url()->current() == "http://localhost:8000/sendemail" || url()->current() == "http://localhost:8000/register")
+            @if(url()->current() == "http://localhost:8000/login" || url()->current() == "http://localhost:8000/sendemail" || url()->current() == "http://localhost:8000/register" || url()->current() == "http://localhost:8000/email/verify")
 
             @else
                 <a href="#">Back to top</a>
             @endif
         </p>
-        @if(url()->current() == "http://localhost:8000/register")
-
-        @else
-            <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
-        @endif
     </div>
 </footer>
     <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>

@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     /**
@@ -155,7 +155,7 @@ class DashboardController extends Controller
 
     public function showUsers()
     {
-        $data = DB::table('users')->orderBy('id', 'asc')->get();
-        return view('cms.users', compact('data'));
+        $userData = DB::table('users')->orderBy('id', 'asc')->get();
+        return view('cms.users', compact('userData'));
     }
 }

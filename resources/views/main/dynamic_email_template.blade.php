@@ -1,3 +1,6 @@
-<p>Hi, This is {{ $data['name'] }} here's my email {{ $data['email'] }}</p>
-<p>{{ $data['message'] }}</p>
-<p>It would be appreciated, if you gone through this feedback.</p>
+<div class="container">
+    <p>Dear Mr. Cruz,</p>
+    <p>Good Day! This is {{ $data['name'] }}</p>
+    <p>{{ $data['message'] }}</p>
+    <p>You can contact me at {{ $data['email'] }} Thank You!</p>
+</div>

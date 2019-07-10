@@ -27,7 +27,7 @@
             </button>
         </div>
     @endif
-    <div class="modal-content mt-5">
+    <div class="modal-content mt-2">
         <div class="modal-header">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
                 <h1 class="h2 flat modal-title">Edit {{ $dashboard->ProjectName }}</h1>
@@ -74,7 +74,7 @@
         <div class="modal-footer">
             <button type="submit" class="btn btn-outline-secondary fa-pull-left">
                 <i class="fa fa-save"></i>
-                Save
+                Update
             </button>
             </form>
             <a href="{{ action('DashboardController@index') }}" class="btn btn-outline-secondary fa-pull-right">

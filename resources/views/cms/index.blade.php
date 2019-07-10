@@ -55,8 +55,8 @@
                                     <div class="d-flex justify-content-between align-items-center mt-3">
                                         <div class="btn-group">
                                             <a href="{{ route('dashboard.edit', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
-                                                <i class="fa fa-edit"></i>
-                                                Edit
+                                                <i class="fa fa-eye"></i>
+                                                Show
                                             </a>
                                             <a href="{{ route('dashboard.destroy', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
                                                 <i class="fa fa-trash"></i>

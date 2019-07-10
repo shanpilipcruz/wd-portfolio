@@ -37,7 +37,7 @@
                                         <i class="fas fa-user"></i>
                                     </span>
                                 </span>
-                                <input type="text" name="name" class="form-control" value="" data-toggle="tooltip" title="Your Name" data-placement="right" required/>
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" data-toggle="tooltip" title="Your Name" data-placement="right" required autofocus/>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-prepend">
@@ -45,7 +45,7 @@
                                         <i class="fas fa-envelope"></i>
                                     </span>
                                 </span>
-                                <input type="email" name="email" class="form-control" value="" data-toggle="tooltip" title="Your Email" data-placement="right" required/>
+                                <input type="email" name="email" class="form-control" placeholder="Your Email" data-toggle="tooltip" title="Your Email" data-placement="right" required/>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-prepend">
@@ -53,7 +53,7 @@
                                         <i class="fas fa-inbox"></i>
                                     </span>
                                 </span>
-                                <textarea name="message" class="form-control" data-toggle="tooltip" title="Enter your Message" data-placement="right" required></textarea>
+                                <textarea name="message" class="form-control" placeholder="Enter Your Message" data-toggle="tooltip" title="Enter your Message" data-placement="right" required></textarea>
                             </div>
                     </div>
                     <div class="modal-footer">
