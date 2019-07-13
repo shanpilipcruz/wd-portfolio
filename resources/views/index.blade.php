@@ -40,7 +40,7 @@
                                 <p class="card-text">{{ $projects->ProjectName }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#view_{{ $projects->id }}">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#view_{{ $projects->id }}">More</button>
                                     </div>
                                     <small class="text-muted">{{ $projects->updated_at }}</small>
                                 </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <a href="{{ $projects->ProjectLink }}" class="btn btn-sm btn-outline-secondary">Download</a>
+                        <a href="{{ $modalData->ProjectLink }}" class="btn btn-sm btn-outline-secondary" target="_blank">View on Github</a>
                         <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

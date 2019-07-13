@@ -53,25 +53,25 @@
                 <h4 class="text-white">Contact</h4>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="http://twitter.com/naaaeeessss">
+                        <a href="http://twitter.com/naaaeeessss" target="_blank">
                             {{--<i class="fab fa-twitter"></i>--}}
                             Twitter
                         </a>
                     </li>
                     <li>
-                        <a href="http://facebook.com/shan.pilip">
+                        <a href="http://facebook.com/shan.pilip" target="_blank">
                             {{--<i class="fab fa-facebook"></i>--}}
                             Facebook
                         </a>
                     </li>
                     <li>
-                        <a href="http://github.com/shanpilipcruz">
+                        <a href="http://github.com/shanpilipcruz" target="_blank">
                             {{--<i class="fab fa-github"></i>--}}
                             Github
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/in/sean-philip-cruz-77b43b143/">
+                        <a href="https://www.linkedin.com/in/sean-philip-cruz-77b43b143/" target="_blank">
                             {{--<i class="fab fa-linkedin"></i>--}}
                             LinkedIn
                         </a>
