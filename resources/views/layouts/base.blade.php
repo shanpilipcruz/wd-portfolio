@@ -32,6 +32,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/album.css') }}">
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
         <title>Sean Philip Cruz - Information Technology Specialist</title>
     </head>
@@ -51,10 +52,30 @@
             <div class="col-sm-4 offset-md-1 py-4">
                 <h4 class="text-white">Contact</h4>
                 <ul class="list-unstyled">
-                    <li><a href="http://twitter.com/naaaeeessss">Twitter</a></li>
-                    <li><a href="http://facebook.com/shan.pilip">Facebook</a></li>
-                    <li><a href="http://github.com/shanpilipcruz">Github</a></li>
-                    <li><a href="https://www.linkedin.com/in/sean-philip-cruz-77b43b143/">LinkedIn</a></li>
+                    <li>
+                        <a href="http://twitter.com/naaaeeessss">
+                            {{--<i class="fab fa-twitter"></i>--}}
+                            Twitter
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://facebook.com/shan.pilip">
+                            {{--<i class="fab fa-facebook"></i>--}}
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://github.com/shanpilipcruz">
+                            {{--<i class="fab fa-github"></i>--}}
+                            Github
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/sean-philip-cruz-77b43b143/">
+                            {{--<i class="fab fa-linkedin"></i>--}}
+                            LinkedIn
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -63,8 +84,15 @@
 <nav class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container d-flex justify-content-between">
         <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center">
-            <img src="{{ asset('images/Icon-brand.png') }}" width="30px"/>
+            <img src="{{ asset('images/new-logo-s.png') }}" width="30px"/>
         </a>
+        @auth
+            <ul class="navbar-nav ml-auto mr-2">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard.index') }}">Dashboard</a>
+                </li>
+            </ul>
+        @endauth
         @if(url()->current() == "http://localhost:8000/login" && Route::has('register'))
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">

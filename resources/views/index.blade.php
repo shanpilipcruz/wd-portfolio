@@ -33,9 +33,11 @@
                 @forelse($data as $key => $projects)
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img src="{{ url('/') }}/images/project_images/{{ $projects->ProjectImage }}" width="100%" height="100%" style="max-height: 600px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
+                            <center>
+                                <img src="{{ url('/') }}/images/project_images/{{ $projects->ProjectImage }}" width="100%" height="100%" style="max-height: 300px; max-width: 300px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
+                            </center>
                             <div class="card-body">
-                                <p class="card-text">{{ $projects->ProjectDescription }}</p>
+                                <p class="card-text">{{ $projects->ProjectName }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#view_{{ $projects->id }}">View</button>
@@ -47,8 +49,8 @@
                     </div>
                 @empty
                     <div class="col-md-12">
-                        <div class="alert alert-warning" role="alert">
-                            <center>No Data to be Displayed!</center>
+                        <div class="display-3">
+                            <center>No Data Found</center>
                         </div>
                     </div>
                 @endforelse
@@ -64,15 +66,20 @@
                     <div class="modal-title">{{ $modalData->ProjectName }}</div>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <img src="{{ url('/') }}/images/project_images/{{ $modalData->ProjectImage }}" width="100%" height="100%" style="max-height: 600px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
+                <center>
+                    <img src="{{ url('/') }}/images/project_images/{{ $modalData->ProjectImage }}" width="100%" height="100%" style="max-height: 200px; max-width: 200px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
+                </center>
                 <div class="modal-body">
                     <p class="card-text">{{ $modalData->ProjectDescription }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">Date Created: {{ $modalData->updated_at }}</small>
                     </div>
+                    <small class="text-muted">Author: {{ $modalData->ProjectAuthor }}</small>
+                    <br>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group">
+                        <a href="{{ $projects->ProjectLink }}" class="btn btn-sm btn-outline-secondary">Download</a>
                         <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

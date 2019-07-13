@@ -13,6 +13,7 @@ class Dashboard extends Model
         'ProjectName',
         'ProjectDescription',
         'ProjectAuthor',
-        'ProjectImage'
+        'ProjectImage',
+        'ProjectLink'
     ];
 }

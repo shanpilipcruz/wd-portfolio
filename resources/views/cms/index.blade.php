@@ -1,24 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class="alert alert-danger mt-3">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('responses.form_error')
+    @include('responses.form_success')
+    @include('responses.form_warning')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
         <h1 class="h2 flat">Dashboard</h1>
         <div class="btn-toolbar">
@@ -44,25 +29,27 @@
                 @endif
                         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-lg-3">
                             <div class="card mb-4 shadow-sm">
-                                <img src="{{ URL::to('/') }}/images/project_images/{{ $projects->ProjectImage }}" class="card-img-top img-responsive" style="max-width: 100%;" alt="{{ $projects->ProjectImage }}">
                                 <div class="card-body">
                                     <h3 class="card-title">{{ $projects->ProjectName }}</h3>
                                     <p class="card-text">
                                         {{ $projects->ProjectDescription }}
                                     </p>
                                     <hr>
-                                    <small class="text-muted">Date Created:&nbsp;{{ $projects->updated_at }}</small>
+                                    <small class="text-muted">Date Created:&nbsp;&nbsp;{{ $projects->updated_at }}</small>
+                                    <small class="text-muted">Author:&nbsp;&nbsp;{{ $projects->ProjectAuthor }}</small>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
-                                        <div class="btn-group">
-                                            <a href="{{ route('dashboard.edit', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
-                                                <i class="fa fa-eye"></i>
-                                                Show
-                                            </a>
-                                            <a href="{{ route('dashboard.destroy', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
+                                        <a href="{{ route('dashboard.edit', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fa fa-eye"></i>
+                                            Show
+                                        </a>
+                                        <form action="{{ route('dashboard.destroy', $projects->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary">
                                                 <i class="fa fa-trash"></i>
                                                 Delete
-                                            </a>
-                                        </div>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +60,9 @@
                 @endif
                 <?php $count++ ?>
             @empty
-                <h2 class="display-3">No Data Found</h2>
+                <center>
+                    <h2 class="display-3">No Data Found</h2>
+                </center>
             @endforelse
             @if($count%4 != 1)
                 </div>

@@ -52,6 +52,7 @@ class DashboardController extends Controller
             'ProjectName' => 'required',
             'ProjectDescription' => 'required',
             'ProjectAuthor' => 'required',
+            'ProjectLink' => 'required',
             'ProjectImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
@@ -63,6 +64,7 @@ class DashboardController extends Controller
             'ProjectName' => $request->ProjectName,
             'ProjectDescription' => $request->ProjectDescription,
             'ProjectAuthor' => $request->ProjectAuthor,
+            'ProjectLink' => $request->ProjectLink,
             'ProjectImage' => $newName
         );
 
@@ -98,43 +100,46 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  Dashboard $dashboard
+     * @param  $id
      * @return Response
      */
     public function update(Request $request, $id)
     {
         $image_name = $request->hidden_image;
         $image = $request->file('ProjectImage');
-        if($image != '')
-        {
+        if($image != '') {
             $request->validate([
                 'ProjectName' => 'required',
                 'ProjectDescription' => 'required',
                 'ProjectAuthor' => 'required',
+                'ProjectLink' => 'required',
                 'ProjectImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/project_images/'), $image_name);
-        } else if($request->get('ProjectName') == $request->get('ProjectName')
-            && $request->get('ProjectDescription') == $request->get('ProjectDescription')
-            && $request->get('ProjectAuthor') == $request->get('ProjectAuthor')
-            && $request->get('ProjectImage') == $request->get('ProjectImage')) {
-            return redirect()->back()->with('warning', 'No changes were Made!');
+        } elseif($request->get('ProjectName') == $request->get('existingProjectName') &&
+            $request->get('ProjectDescription') == $request->get('existingProjectDescription') &&
+            $request->get('ProjectAuthor') == $request->get('existingProjectAuthor') &&
+            $request->get('ProjectImage') == $request->get('existingProjectImage') &&
+            $request->get('ProjectLink') == $request->get('existingProjectLink')) {
+            return redirect()->back()->with('warning', 'No changes has been detected!');
         } else {
-            $ProjectImage = Dashboard::table('dashboards')->select('ProjectImage')->where('id', $id);
+            $ExistingProjectImage = $request->get('existingProjectImage');
             $request->validate([
                 'ProjectName' => 'required',
                 'ProjectDescription' => 'required',
                 'ProjectAuthor' => 'required',
+                'ProjectLink' => 'required'
             ]);
-            $image_name = $ProjectImage;
+            $image_name = $ExistingProjectImage;
         }
 
         $form_data = array(
             'ProjectName'  =>   $request->ProjectName,
             'ProjectDescription'  =>   $request->ProjectDescription,
             'ProjectAuthor'  =>   $request->ProjectAuthor,
+            'ProjectLink' => $request->ProjectLink,
             'ProjectImage'  =>   $image_name
         );
 
@@ -145,11 +150,12 @@ class DashboardController extends Controller
             ->with('success','Project updated Successfully');
     }
 
-    public function destroy(Dashboard $dashboard)
+    public function destroy($id)
     {
-        $dashboard->delete();
+        $project = Dashboard::findOrFail($id);
+        $project->delete();
 
-        return redirect()->route('cms.index')
+        return redirect()->route('dashboard.index')
             ->with('success','Project has been Deleted');
     }
 

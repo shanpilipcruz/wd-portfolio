@@ -34,15 +34,26 @@
                     <i class="fas fa-list-alt"></i>
                 </span>
                     </div>
-                    <textarea type="text" class="form-control" id="ProjectDescription" name="ProjectDescription" placeholder="Description" required aria-label="projectDescription"></textarea>
+                    <textarea type="text" class="form-control" id="ProjectDescription" name="ProjectDescription" placeholder="Description" required aria-label="projectDescription" maxlength="250"></textarea>
+                </div>
+                <p id="characterCount" class="lead fa-pull-right">
+                    250
+                </p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="ProjectAuthor" name="ProjectAuthor" placeholder="Author" required aria-label="projectAuthor" data-toggle="tooltip" title="put who developed the project, if not you or you just contributed, put your name and copyright." data-placement="bottom">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                <span class="input-group-text">
-                    <i class="fas fa-user"></i>
-                </span>
+                        <span class="input-group-text">
+                            <i class="fa fa-link"></i>
+                        </span>
                     </div>
-                    <input type="text" class="form-control" id="ProjectAuthor" name="ProjectAuthor" placeholder="Author" required aria-label="projectAuthor">
+                    <input type="text" class="form-control" id="ProjectLink" name="ProjectLink" placeholder="Link" required aria-label="projectLink" data-toggle="tooltip" title="where the project is viewable or downloadable" data-placement="bottom">
                 </div>
                 <input type="file" class="form-control-file" id="ProjectImage" name="ProjectImage" required>
         </div>

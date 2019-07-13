@@ -65,6 +65,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ action('IndexController@index') }}">
+                            <i class="fa fa-home mr-1"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ action('DashboardController@create') }}">
                             <i class="fa fa-plus-square mr-2"></i>
                             Create

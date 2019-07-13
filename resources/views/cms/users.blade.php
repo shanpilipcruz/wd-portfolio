@@ -1,31 +1,8 @@
 @extends('layouts.dashboard')
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger mt-3">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if (session('warning'))
-        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
-            {{ session('warning') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+    @include('responses.form_error')
+    @include('responses.form_success')
+    @include('responses.form_warning')
     @foreach($userData as $usersData)
         <div id="view_{{ $usersData->id }}" class="modal fade" role="dialog">
             <div class="modal-lg modal-dialog">
@@ -143,8 +120,15 @@
                     <td>{{ $users->email }}</td>
                     <td>{{ $users->address }}</td>
                     <td>
-                        <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#view_{{ $users->id }}">Show</a>
-                        <a href="{{ action('UserProfileController@destroy', $users->id) }}" class="btn btn-outline-warning">Delete</a>
+                        @if($loggedUser = auth()->user())
+                            @if($loggedUser->id === $users->id)
+                                <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#view_{{ $users->id }}" style="width: 140px;">Show</a>
+                                <a href="{{ action('UserProfileController@destroy', $users->id) }}" class="btn btn-outline-warning" style="visibility: hidden;">Delete</a>
+                            @else
+                                <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#view_{{ $users->id }}">Show</a>
+                                <a href="{{ action('UserProfileController@destroy', $users->id) }}" class="btn btn-outline-warning">Delete</a>
+                            @endif
+                        @endif
                     </td>
                 </tr>
             </tbody>
