@@ -53,10 +53,10 @@ class DashboardController extends Controller
             'ProjectDescription' => 'required',
             'ProjectAuthor' => 'required',
             'ProjectLink' => 'required',
-            'ProjectImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'upload_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $image = $request->file('ProjectImage');
+        $image = $request->file('upload_image');
 
         $newName = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images/project_images'), $newName);
@@ -113,7 +113,7 @@ class DashboardController extends Controller
                 'ProjectDescription' => 'required',
                 'ProjectAuthor' => 'required',
                 'ProjectLink' => 'required',
-                'ProjectImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'upload_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
             $image_name = time() . '.' . $image->getClientOriginalExtension();
@@ -121,7 +121,7 @@ class DashboardController extends Controller
         } elseif($request->get('ProjectName') == $request->get('existingProjectName') &&
             $request->get('ProjectDescription') == $request->get('existingProjectDescription') &&
             $request->get('ProjectAuthor') == $request->get('existingProjectAuthor') &&
-            $request->get('ProjectImage') == $request->get('existingProjectImage') &&
+            $request->get('upload_image') == $request->get('existingProjectImage') &&
             $request->get('ProjectLink') == $request->get('existingProjectLink')) {
             return redirect()->back()->with('warning', 'No changes has been detected!');
         } else {

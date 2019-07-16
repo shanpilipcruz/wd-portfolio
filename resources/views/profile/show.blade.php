@@ -48,10 +48,11 @@
                                 @if(auth()->user()->profile_img == null)
                                     <img src="{{ URL::to('/') }}/images/profile_images/default.png" class="img-thumbnail" alt="{{ $user->profile_img }}" width="275px" height="275px">
                                 @else
-                                    <img src="{{ URL::to('/') }}/images/profile_images/{{ $user->profile_img }}" class="img-thumbnail" alt="{{ $user->profile_img }}" width="275px" height="275px">
+                                    <img id="preview" src="{{ URL::to('/') }}/images/profile_images/{{ $user->profile_img }}" class="img-thumbnail" alt="{{ $user->profile_img }}" width="275px" height="275px">
                                 @endif
                             @endauth
                             <input type="file" id="profile_img" name="profile_img" class="form-control-file mb-sm-3 mt-md-2">
+                            <input type="hidden" id="image_name" name="image_name" />
                         </center>
                     </div>
                     <div class="col-md-8 col-sm-12">
@@ -90,7 +91,7 @@
                         <textarea id="description" name="description" class="form-control" required maxlength="250" style="resize: none; height: 80px;">{{ $user->description }}</textarea>
                         <label for="description" class="form-control-placeholder-floating">Description</label>
                         <div class="fa-pull-right">
-                            <p id="charNum" class="lead"></p>
+                            <p id="charNum" class="lead">250</p>
                         </div>
                     </div>
                 </div>

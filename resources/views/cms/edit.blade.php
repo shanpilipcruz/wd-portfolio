@@ -52,7 +52,7 @@
                 <div class="input-group mt-3">
                     <div class="custom-file">
                         <label class="custom-file-label" for="ProjectImage">Choose File</label>s
-                        <input type="file" class="custom-file-input" id="ProjectImage" name="ProjectImage">
+                        <input type="file" class="custom-file-input" id="upload_image" name="upload_image">
                     </div>
                 </div>
                 <input type="hidden" class="form-control" id="existingProjectName" name="existingProjectName" placeholder="Project Name" required aria-label="existingProjectName" value="{{ $dashboard->ProjectName }}">

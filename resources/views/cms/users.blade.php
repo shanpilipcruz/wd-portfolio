@@ -16,9 +16,9 @@
                             <div class="col-md-4">
                                 <center>
                                     @if($usersData->profile_img === null)
-                                        <img src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" height="150px" width="150px">
+                                        <img class="img-thumbnail" src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" height="150px" width="150px">
                                     @else
-                                        <img src="{{ url('/') }}/images/profile_images/{{ $usersData->profile_img }}" alt="{{ $usersData->profile_img }}" height="150px" width="150px">
+                                        <img class="img-thumbnail" src="{{ url('/') }}/images/profile_images/{{ $usersData->profile_img }}" alt="{{ $usersData->profile_img }}" height="150px" width="150px">
                                     @endif
                                 </center>
                                 <br>

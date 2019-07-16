@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
     <title>Manage Projects</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/album.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/croppie.css') }}">
 
     <style>
         .bd-placeholder-img {
@@ -33,6 +34,7 @@
             }
         }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-lg">
@@ -103,14 +105,71 @@
         <main class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
             @yield('content')
         </main>
+
+        @include('responses.modals')
     </div>
 </div>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/croppie.js') }}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    let resize = $("#upload-demo").croppie({
+        enableExif: true,
+        enableOrientation: true,
+        viewport: {
+            width: 200,
+            height: 200,
+            type: 'square'
+        },
+        boundary: {
+            width: 300,
+            height: 300
+        }
+    });
+
+    $("#profile_img").on('change', function(){
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            resize.croppie('bind', {
+                url: e.target.result
+            }).then(function(){
+               console.log('jQuery Bind Complete');
+            });
+        };
+        reader.readAsDataURL(this.files[0]);
+        $("#cropModal").modal('show');
+    });
+
+    $('.upload-image').on('click', function(){
+        resize.croppie('result', {
+            type: 'canvas',
+            size: 'viewport',
+        }).then(function(img){
+            $.ajax({
+                url: "{{ route('upload.image') }}",
+                type: "POST",
+                data: { "profile_img" : img},
+                success: function(data){
+                    $('#cropModal').modal('hide');
+                    $("#preview").attr("src", img);
+                    $("#image_name").val(data);
+                }
+            });
+        });
+    });
+
+</script>
+{{--TODO set img src to image filename that is in the local and save to database --}}
 <script src="{{ asset('js/jquery.inputmask.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/customScripts.js') }}"></script>
 <script src="{{ asset('js/all.min.js') }}"></script>
 <script src="{{ asset('js/inputmask.js') }}"></script>
+<script src="{{ asset('js/customScripts.js') }}"></script>
 </body>
 </html>
