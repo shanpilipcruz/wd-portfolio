@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Dashboard;
+use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +22,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $dashboard = Dashboard::latest()->paginate(8);
+        $dashboard = Project::latest()->paginate(8);
 
         $data = array('user' => $user, 'dashboard' => $dashboard);
 
@@ -68,7 +68,7 @@ class DashboardController extends Controller
             'ProjectImage' => $newName
         );
 
-        Dashboard::create($formData);
+        Project::create($formData);
 
         return redirect()->route('dashboard.index')
             ->with('success','Project Added Successfully');
@@ -77,10 +77,10 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Dashboard $dashboard
+     * @param  Project $dashboard
      * @return Response
      */
-    public function show(Dashboard $dashboard)
+    public function show(Project $dashboard)
     {
         return view('cms.show', compact('dashboard'));
     }
@@ -88,10 +88,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Dashboard $dashboard
+     * @param  Project $dashboard
      * @return Response
      */
-    public function edit(Dashboard $dashboard)
+    public function edit(Project $dashboard)
     {
         return view('cms.edit', compact('dashboard'));
     }
@@ -118,11 +118,11 @@ class DashboardController extends Controller
 
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/project_images/'), $image_name);
-        } elseif($request->get('ProjectName') == $request->get('existingProjectName') &&
-            $request->get('ProjectDescription') == $request->get('existingProjectDescription') &&
-            $request->get('ProjectAuthor') == $request->get('existingProjectAuthor') &&
-            $request->get('upload_image') == $request->get('existingProjectImage') &&
-            $request->get('ProjectLink') == $request->get('existingProjectLink')) {
+        } elseif($request->get('ProjectName') === $request->get('existingProjectName') &&
+            $request->get('ProjectDescription') === $request->get('existingProjectDescription') &&
+            $request->get('ProjectAuthor') === $request->get('existingProjectAuthor') &&
+            $request->get('upload_image') === $request->get('existingProjectImage') &&
+            $request->get('ProjectLink') === $request->get('existingProjectLink')) {
             return redirect()->back()->with('warning', 'No changes has been detected!');
         } else {
             $ExistingProjectImage = $request->get('existingProjectImage');
@@ -143,7 +143,7 @@ class DashboardController extends Controller
             'ProjectImage'  =>   $image_name
         );
 
-        Dashboard::whereId($id)->update($form_data);
+        Project::whereId($id)->update($form_data);
 
         return redirect()
             ->back()
@@ -152,7 +152,7 @@ class DashboardController extends Controller
 
     public function destroy($id)
     {
-        $project = Dashboard::findOrFail($id);
+        $project = Project::findOrFail($id);
         $project->delete();
 
         return redirect()->route('dashboard.index')

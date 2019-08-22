@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Dashboard;
+use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,7 +15,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $data = Dashboard::latest()->paginate(9);
+        $data = Project::latest()->paginate(9);
         return view('index', compact('data'));
     }
 
@@ -43,10 +43,10 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Dashboard $dashboard
+     * @param Project $dashboard
      * @return Response
      */
-    public function show(Dashboard $dashboard)
+    public function show(Project $dashboard)
     {
         return view('profile.show', compact('user'));
     }
@@ -54,10 +54,10 @@ class IndexController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Dashboard $dashboard
+     * @param  Project $dashboard
      * @return Response
      */
-    public function edit(Dashboard $dashboard)
+    public function edit(Project $dashboard)
     {
         //
     }
@@ -66,10 +66,10 @@ class IndexController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Dashboard $dashboard
+     * @param Project $dashboard
      * @return Response
      */
-    public function update(Request $request, Dashboard $dashboard)
+    public function update(Request $request, Project $dashboard)
     {
         //
     }
@@ -77,10 +77,10 @@ class IndexController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Dashboard $dashboard
+     * @param Project $dashboard
      * @return Response
      */
-    public function destroy(Dashboard $dashboard)
+    public function destroy(Project $dashboard)
     {
         //
     }

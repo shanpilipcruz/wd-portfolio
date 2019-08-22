@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Dashboard extends Model
+class Project extends Model
 {
     use SoftDeletes;
 
@@ -16,4 +16,10 @@ class Dashboard extends Model
         'ProjectImage',
         'ProjectLink'
     ];
+
+    protected $dates = ['deleted_at'];
+
+    public function Users(){
+        return $this->hasMany('App\User');
+    }
 }

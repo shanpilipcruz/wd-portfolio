@@ -3,21 +3,17 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, Notifiable;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    use HasApiTokens, Notifiable, SoftDeletes;
     public function dashboard()
     {
-        return $this->belongsTo('App/Dashboard');
+        return $this->hasOne('App/Profile');
     }
 
     protected $fillable = [
@@ -32,6 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'description',
         'contact_number'
     ];
+
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for arrays.

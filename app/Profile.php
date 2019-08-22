@@ -3,14 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
 {
 
-    public function User()
-    {
-        return $this->hasMany('App/User');
-    }
+    use SoftDeletes;
 
     protected $fillable = [
         'first_name',
@@ -24,4 +22,10 @@ class Profile extends Model
         'address',
         'description'
     ];
+
+    protected $dates = ['deleted_at'];
+
+    public function User(){
+        return $this->belongsTo('App\User');
+    }
 }

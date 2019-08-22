@@ -119,14 +119,14 @@
                     <td>{{ $users->last_name }}</td>
                     <td>{{ $users->email }}</td>
                     <td>{{ $users->address }}</td>
-                    <td>
+                    <td class="text-center">
                         @if($loggedUser = auth()->user())
                             @if($loggedUser->id === $users->id)
-                                <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#view_{{ $users->id }}" style="width: 140px;">Show</a>
-                                <a href="{{ action('UserProfileController@destroy', $users->id) }}" class="btn btn-outline-warning" style="visibility: hidden;">Delete</a>
+                                <a href="#" data-toggle="modal" data-target="#view_{{ $users->id }}" class="text-muted">Show</a>
+                                <a href="{{ action('UserProfileController@destroy', $users->id) }}" hidden class="text-muted">Delete</a>
                             @else
-                                <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#view_{{ $users->id }}">Show</a>
-                                <a href="{{ action('UserProfileController@destroy', $users->id) }}" class="btn btn-outline-warning">Delete</a>
+                                <a href="#" data-toggle="modal" data-target="#view_{{ $users->id }}" class="text-muted">Show</a>
+                                <a href="{{ action('UserProfileController@destroy', $users->id) }}" class="text-muted">Delete</a>
                             @endif
                         @endif
                     </td>

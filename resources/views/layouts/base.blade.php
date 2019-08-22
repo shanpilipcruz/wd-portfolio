@@ -34,6 +34,7 @@
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
+        <link rel="icon" href="{{ asset('images/new-logo-s.png') }}" type="image/gif" sizes="16x16"">
         <title>Sean Philip Cruz - Information Technology Specialist</title>
     </head>
 <body>
@@ -84,7 +85,7 @@
 <nav class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container d-flex justify-content-between">
         <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center">
-            <img src="{{ asset('images/new-logo-s.png') }}" width="30px"/>
+            <img src="{{ asset('images/new-logo-s.png') }}" width="30px" alt="website_logo"/>
         </a>
         @auth
             <ul class="navbar-nav ml-auto mr-2">

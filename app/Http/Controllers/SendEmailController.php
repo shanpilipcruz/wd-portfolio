@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Dashboard;
 use App\Mail\SendMail;
+use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmailController extends Controller
 {
     function index(){
-        $data = Dashboard::latest()->paginate(9);
+        $data = Project::latest()->paginate(9);
         return view('main.sendemail', compact('data'));
     }
 

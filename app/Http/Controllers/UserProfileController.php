@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Dashboard;
+use App\Project;
 use App\User;
 use DB;
 use Illuminate\Http\Request;
@@ -53,7 +53,7 @@ class UserProfileController extends Controller
      */
     public function show(User $user)
     {
-        $dashboard = Dashboard::latest()->get();
+        $dashboard = Project::latest()->get();
         return view('profile.show', compact('user', 'dashboard'));
     }
 

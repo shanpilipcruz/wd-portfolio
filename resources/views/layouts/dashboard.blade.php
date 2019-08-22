@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/album.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/croppie.css') }}">
+    <link rel="icon" href="{{ asset('images/new-logo-s.png') }}" type="image/gif" sizes="16x16"">
 
     <style>
         .bd-placeholder-img {
@@ -37,10 +38,24 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-lg">
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand flat col-sm-3 col-md-2 mr-0" href="{{ action('DashboardController@index') }}">
         Project Management
     </a>
+
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                {{ __('Sign Out') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </li>
+    </ul>
 </nav>
 
 <div class="container-fluid">
@@ -94,7 +109,7 @@
                                         document.getElementById('logout-form').submit();">
                             <i class="fa fa-power-off mr-2"></i>{{ __('Logout') }}
                         </a>
-                        
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

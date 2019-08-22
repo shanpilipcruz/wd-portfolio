@@ -32,17 +32,17 @@
                 </div>--}}
                 @forelse($data as $key => $projects)
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <center>
-                                <img src="{{ url('/') }}/images/project_images/{{ $projects->ProjectImage }}" width="100%" height="100%" style="max-height: 300px; max-width: 300px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
-                            </center>
+                        <div class="card" style="height: 450px;">
+                            <img src="{{ URL::to('/') }}/images/project_images/{{ $projects->ProjectImage }}" class="card-img-top img-fluid" alt="{{ $projects->ProjectImages }}">
                             <div class="card-body">
                                 <p class="card-text">{{ $projects->ProjectName }}</p>
+                            </div>
+                            <div class="card-footer">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#view_{{ $projects->id }}">More</button>
                                     </div>
-                                    <small class="text-muted">{{ $projects->updated_at }}</small>
+                                    <small class="text-muted">Date Created: {{ $projects->updated_at }}</small>
                                 </div>
                             </div>
                         </div>
