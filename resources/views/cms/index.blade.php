@@ -13,13 +13,7 @@
             </a>
         </div>
     </div>
-    <form method="POST">
-        @csrf
-        <div class="form-group-floating">
-            <input id="search" type="text" class="form-control" name="search" required autocomplete="search" autofocus>
-            <label for="search" class="form-control-placeholder-floating flat">Search</label>
-        </div>
-    </form>
+    <hr class="my-4">
     <div class="album py-5 bg-light">
         <div class="container">
             <?php $count = 1;?>
