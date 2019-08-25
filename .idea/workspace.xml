@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7c4f3c21-c3da-42af-8f25-f8586454c210" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/cms/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cms/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -277,7 +276,7 @@
       <workItem from="1565187080400" duration="671000" />
       <workItem from="1565187972621" duration="1945000" />
       <workItem from="1565365273483" duration="184000" />
-      <workItem from="1566482382562" duration="2804000" />
+      <workItem from="1566482382562" duration="3468000" />
     </task>
     <task id="LOCAL-00001" summary="Dashboard implemented, Minor Changes.">
       <created>1561882443640</created>
@@ -391,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566484967343</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="updates">
+      <created>1566485247715</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1566485247715</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
