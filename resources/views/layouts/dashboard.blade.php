@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/album.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/croppie.css') }}">
-    <link rel="icon" href="{{ asset('images/new-logo-s.png') }}" type="image/gif" sizes="16x16"">
+    <link rel="icon" href="{{ asset('images/new-logo-s.png') }}" type="image/gif" sizes="16x16">
 
     <style>
         .bd-placeholder-img {
@@ -63,14 +63,21 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    @if($user = auth()->user())
+                    @if(Auth::user()->Profile->first_name === null)
                         <li class="navbar-nav px-3">
-                            <a href="{{ action('UserProfileController@show', $user) }}" class="nav-link flat">
+                            <a href="{{ action('UserProfileController@create', Auth::user()->id) }}" class="nav-link flat">
                                 <span class="sr-only">(current)</span>
-                                @if($user->profile_img === null)
-                                    <img src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->first_name }}
+                                <img src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->Profile->username }}
+                            </a>
+                        </li>
+                    @else
+                        <li class="navbar-nav px-3">
+                            <a href="{{ action('UserProfileController@show', Auth::user()->id) }}" class="nav-link flat">
+                                <span class="sr-only">(current)</span>
+                                @if(Auth::user()->Profile->profile_picture === null)
+                                    <img src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->Profile->first_name }}
                                 @else
-                                    <img src="{{ url('/') }}/images/profile_images/{{ $user->profile_img }}" alt="{{ $user->profile_img }}" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->first_name }}
+                                    <img src="{{ url('/') }}/images/profile_images/{{ Auth::user()->Profile->profile_picture }}" alt="{{ Auth::user()->Profile->profile_picture }}" class="rounded img-responsive mr-3" width="25px" height="25px">Hi! {{ Auth::user()->Profile->first_name }}
                                 @endif
                             </a>
                         </li>
@@ -93,27 +100,20 @@
                             Create
                         </a>
                     </li>
-                    @if($user->role == 1)
+                    @if(Auth::user()->user_role === 1)
 
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ action('DashboardController@showUsers') }}">
-                                <i class="fa fa-user mr-2"></i>
-                                Users
-                            </a>
-                        </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                            <i class="fa fa-power-off mr-2"></i>{{ __('Logout') }}
-                        </a>
+                        @if(Auth::user()->Profile->first_name === null)
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ action('DashboardController@showUsers') }}">
+                                    <i class="fa fa-user mr-2"></i>
+                                    Users
+                                </a>
+                            </li>
+                        @endif
+                    @endif
                 </ul>
             </div>
         </nav>
@@ -172,7 +172,7 @@
                 success: function(data){
                     $('#cropModal').modal('hide');
                     $("#preview").attr("src", img);
-                    $("#image_name").val(data);
+                    $("#profile_picture").val(data);
                 }
             });
         });
@@ -186,5 +186,6 @@
 <script src="{{ asset('js/all.min.js') }}"></script>
 <script src="{{ asset('js/inputmask.js') }}"></script>
 <script src="{{ asset('js/customScripts.js') }}"></script>
+
 </body>
 </html>

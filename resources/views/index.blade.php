@@ -33,9 +33,9 @@
                 @forelse($data as $key => $projects)
                     <div class="col-md-4">
                         <div class="card" style="height: 450px;">
-                            <img src="{{ URL::to('/') }}/images/project_images/{{ $projects->ProjectImage }}" class="card-img-top img-fluid" alt="{{ $projects->ProjectImages }}">
+                            <img src="{{ URL::to('/') }}/images/project_images/{{ $projects->project_image }}" class="card-img-top img-fluid" alt="{{ $projects->project_image }}">
                             <div class="card-body">
-                                <p class="card-text">{{ $projects->ProjectName }}</p>
+                                <p class="card-text">{{ $projects->project_name }}</p>
                             </div>
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -63,23 +63,23 @@
         <div class="modal-dialog">
             <div class="modal-content mb-4 shadow-sm">
                 <div class="modal-header">
-                    <div class="modal-title">{{ $modalData->ProjectName }}</div>
+                    <div class="modal-title">{{ $modalData->project_name }}</div>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <center>
-                    <img src="{{ url('/') }}/images/project_images/{{ $modalData->ProjectImage }}" width="100%" height="100%" style="max-height: 200px; max-width: 200px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
+                    <img src="{{ url('/') }}/images/project_images/{{ $modalData->project_image }}" width="100%" height="100%" style="max-height: 200px; max-width: 200px;" class="card-img img-fluid" alt="{{ $projects->ProjectImages }}">
                 </center>
                 <div class="modal-body">
-                    <p class="card-text">{{ $modalData->ProjectDescription }}</p>
+                    <p class="card-text">{{ $modalData->project_description }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">Date Created: {{ $modalData->updated_at }}</small>
                     </div>
-                    <small class="text-muted">Author: {{ $modalData->ProjectAuthor }}</small>
+                    <small class="text-muted">Author: {{ $modalData->project_author }}</small>
                     <br>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <a href="{{ $modalData->ProjectLink }}" class="btn btn-sm btn-outline-secondary" target="_blank">View on Github</a>
+                        <a href="{{ $modalData->project_link }}" class="btn btn-sm btn-outline-secondary" target="_blank">View on Github</a>
                         <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

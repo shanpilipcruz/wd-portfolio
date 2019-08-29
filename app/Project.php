@@ -10,16 +10,13 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'ProjectName',
-        'ProjectDescription',
-        'ProjectAuthor',
-        'ProjectImage',
-        'ProjectLink'
+        'uploader_id',
+        'project_name',
+        'project_description',
+        'project_author',
+        'project_image',
+        'project_link'
     ];
 
     protected $dates = ['deleted_at'];
-
-    public function Users(){
-        return $this->hasMany('App\User');
-    }
 }

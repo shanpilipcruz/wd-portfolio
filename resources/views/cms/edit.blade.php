@@ -23,7 +23,7 @@
                             <i class="fas fa-folder"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" id="ProjectName" name="ProjectName" placeholder="Project Name" required aria-label="projectName" value="{{ $dashboard->ProjectName }}" autofocus>
+                    <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Project Name" required aria-label="project_name" value="{{ $dashboard->ProjectName }}" autofocus>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -31,7 +31,7 @@
                             <i class="fas fa-list-alt"></i>
                         </span>
                     </div>
-                    <textarea type="text" class="form-control" id="ProjectDescription" name="ProjectDescription" placeholder="Description" required aria-label="projectDescription">{{ $dashboard->ProjectDescription }}</textarea>
+                    <textarea type="text" class="form-control" id="project_description" name="project_description" placeholder="Description" required aria-label="project_description">{{ $dashboard->ProjectDescription }}</textarea>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -39,7 +39,7 @@
                             <i class="fas fa-user"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" id="ProjectAuthor" name="ProjectAuthor" placeholder="Author" required aria-label="projectAuthor" value="{{ $dashboard->ProjectAuthor }}">
+                    <input type="text" class="form-control" id="project_author" name="project_author" placeholder="Author" required aria-label="project_author" value="{{ $dashboard->ProjectAuthor }}">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -47,19 +47,14 @@
                             <i class="fa fa-link"></i>
                         </span>
                     </div>
-                    <input type="text" class="form-control" id="ProjectLink" name="ProjectLink" placeholder="Link to the Project" required aria-label="projectLink" value="{{ $dashboard->ProjectLink }}">
+                    <input type="text" class="form-control" id="project_link" name="project_link" placeholder="Link to the Project" required aria-label="project_link" value="{{ $dashboard->ProjectLink }}">
                 </div>
                 <div class="input-group mt-3">
                     <div class="custom-file">
                         <label class="custom-file-label" for="ProjectImage">Choose File</label>s
-                        <input type="file" class="custom-file-input" id="upload_image" name="upload_image">
+                        <input type="file" class="custom-file-input" id="project_image" name="project_image">
                     </div>
                 </div>
-                <input type="hidden" class="form-control" id="existingProjectName" name="existingProjectName" placeholder="Project Name" required aria-label="existingProjectName" value="{{ $dashboard->ProjectName }}">
-                <input type="hidden" class="form-control" id="existingProjectDescription" name="existingProjectDescription" placeholder="Project Description" required aria-label="existingProjectDescription" value="{{ $dashboard->ProjectDescription }}">
-                <input type="hidden" class="form-control" id="existingProjectAuthor" name="existingProjectAuthor" placeholder="Project Author" required aria-label="existingProjectAuthor" value="{{ $dashboard->ProjectAuthor }}">
-                <input type="hidden" class="form-control" id="existingProjectImage" name="existingProjectImage" placeholder="Project Image" aria-label="existingProjectImage" value="{{ $dashboard->ProjectImage }}">
-                <input type="hidden" class="form-control" id="existingProjectLink" name="existingProjectLink" placeholder="Link to the Project" required aria-label="existingProjectLink" value="{{ $dashboard->ProjectLink }}">
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-outline-secondary fa-pull-left">

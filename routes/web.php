@@ -20,7 +20,10 @@ Route::post('/sendemail/send', 'SendEmailController@send');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/dashboard','DashboardController');
 Route::resource('/profile', 'UserProfileController',
-    ['except' => ['index', 'store', 'delete', 'edit']]);
+    ['except' => ['index', 'delete', 'edit']]);
+
+Route::get('/profile/create/{id}', 'UserProfileController@create');
+Route::post('/profile/store/{id}', 'UserProfileController@store');
 
 Route::get('/users', 'DashboardController@showUsers');
 Route::post('crop-image', ['as' => 'upload.image', 'uses' => 'ImageController@uploadPhoto']);

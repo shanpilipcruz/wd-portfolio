@@ -34,7 +34,8 @@
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/floating-labels.css') }}">
-        <link rel="icon" href="{{ asset('images/new-logo-s.png') }}" type="image/gif" sizes="16x16"">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <link rel="icon" href="{{ asset('images/new-logo-s.png') }}" type="image/gif" sizes="16x16">
         <title>Sean Philip Cruz - Information Technology Specialist</title>
     </head>
 <body>

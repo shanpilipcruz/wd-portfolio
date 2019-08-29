@@ -24,14 +24,14 @@
                         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-lg-3">
                             <div class="card mb-4 shadow-sm">
                                 <div class="card-body" style="height: 300px;">
-                                    <h3 class="card-title">{{ $projects->ProjectName }}</h3>
+                                    <h3 class="card-title">{{ $projects->project_name }}</h3>
                                     <p class="card-text">
-                                        {{ $projects->ProjectDescription }}
+                                        {{ $projects->project_description }}
                                     </p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">Date Created:&nbsp;&nbsp;{{ $projects->updated_at }}</small>
-                                    <small class="text-muted">Author:&nbsp;&nbsp;{{ $projects->ProjectAuthor }}</small>
+                                    <small class="text-muted">Author:&nbsp;&nbsp;{{ $projects->project_author }}</small>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
                                         <a href="{{ route('dashboard.edit', $projects->id) }}" class="btn btn-sm btn-outline-secondary">
                                             <i class="fa fa-eye"></i>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\Project;
 use App\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -29,9 +31,11 @@ class UserProfileController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $userid = User::findOrFail($id);
+
+        return view('profile.create', compact('userid'));
     }
 
     /**
@@ -40,9 +44,27 @@ class UserProfileController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        User::findOrFail($id);
+
+        $userid = Auth::user()->id;
+
+        $request->validate([
+           'first_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'contact_number' => 'required',
+            'birth_date' => 'required',
+            'profile_picture' => 'required'
+        ]);
+
+        $request['user_id'] = $userid;
+        Profile::create($request->all());
+
+        return redirect()
+            ->route('dashboard.index')
+            ->with('success', 'You have successfully created your Profile!');
     }
 
     /**
@@ -88,52 +110,51 @@ class UserProfileController extends Controller
             $imageName = time() . "." .$image->getClientOriginalExtension();
             $image->move(public_path('images/profile_images'), $imageName);*/
         $croppedImage = $request->get('image_name');
-        if($croppedImage != null){
+        if($croppedImage !== null){
             $request->validate([
                 'first_name' => 'required', 'middle_name' => 'required',
                 'last_name' => 'required', 'address' => 'required', 'email' => 'email | required',
-                'description' => 'required', 'contact' => 'required',
-                'profile_img' => 'required | image | max:2048 | mimes: jpg,jpeg,png'
+                'profile_picture' => 'required | image | max:2048 | mimes: jpg,jpeg,png', 'birth_date' => 'required',
             ]);
 
             $formData = array(
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
-                'last_name' => $request->last_name,
-                'address' => $request->address,
-                'email' => $request->email,
-                'contact_number' => $request->contact,
-                'description' => $request->description,
-                'profile_img' => $croppedImage
+                'first_name' => $request['first_name'],
+                'middle_name' => $request['middle_name'],
+                'last_name' => $request['last_name'],
+                'address' => $request['address'],
+                'email' => $request['email'],
+                'contact_number' => $request['contact_number'],
+                'birth_Date' => $request['birth_Date'],
+                'profile_picture' => $croppedImage
             );
 
-        } else if($request->get('first_name') == $request->get('first_name') &&
-            $request->get('middle_name') == $request->get('middle_name') &&
-            $request->get('last_name') == $request->get('last_name') &&
-            $request->get('email') == $request->get('email') &&
-            $request->get('address') == $request->get('address') &&
-            $request->get('contact') == $request->get('contact') &&
-            $request->get('description') == $request->get('description') &&
-            $request->get('profile_img') == $request->get('profile_img')){
+        } else if($request->get('first_name') === $request['first_name'] &&
+            $request->get('middle_name') === $request['middle_name'] &&
+            $request->get('last_name') === $request['last_name'] &&
+            $request->get('email') === $request['email'] &&
+            $request->get('address') === $request['address'] &&
+            $request->get('birth_date') === $request['birth_date'] &&
+            $request->get('contact_number') === $request['contact_number'] &&
+            $request->get('profile_picture') === $request['profile_picture']){
             return redirect()->back()->with('warning', 'No changes were made!');
         } else {
-            $profile_img = Users::table('users')->select('profile_img')->where('id', $id);
+            $profile_img = Users::table('users')->select('profile_picture')->where('id', $id);
             $request->validate([
                 'first_name' => 'required', 'last_name' => 'required',
                 'address' => 'required', 'email' => 'email | required',
-                'description' => 'required', 'contact' => 'required'
+                'contact_number' => 'required', 'birth_date' => 'required',
             ]);
             $imageName = $profile_img;
 
             $formData = array(
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
-                'last_name' => $request->last_name,
-                'address' => $request->address,
-                'email' => $request->email,
-                'contact_number' => $request->contact,
-                'description' => $request->description,
-                'profile_img' => $imageName
+                'first_name' => $request['first_name'],
+                'middle_name' => $request['middle_name'],
+                'last_name' => $request['last_name'],
+                'address' => $request['address'],
+                'email' => $request['email'],
+                'birth_date' => $request['birth_date'],
+                'contact_number' => $request['contact_number'],
+                'profile_picture' => $imageName
             );
         }
 

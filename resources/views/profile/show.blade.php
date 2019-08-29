@@ -37,69 +37,76 @@
         </div>
     </div>
     <div class="container">
-        @if($user = auth()->user())
-            <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="row">
-                    <div class="col-md-4 col-sm-12">
-                        <center style="margin-bottom: 30px;">
-                            @auth
-                                @if(auth()->user()->profile_img == null)
-                                    <img src="{{ URL::to('/') }}/images/profile_images/default.png" class="img-thumbnail" alt="{{ $user->profile_img }}" width="275px" height="275px">
-                                @else
-                                    <img id="preview" src="{{ URL::to('/') }}/images/profile_images/{{ $user->profile_img }}" class="img-thumbnail" alt="{{ $user->profile_img }}" width="275px" height="275px">
-                                @endif
-                            @endauth
-                            <input type="file" id="profile_img" name="profile_img" class="form-control-file mb-sm-3 mt-md-2">
-                            <input type="hidden" id="image_name" name="image_name" />
-                        </center>
-                    </div>
-                    <div class="col-md-8 col-sm-12">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group-floating">
-                                    <input id="first_name" type="text" class="form-control" name="first_name" value="{{ $user->first_name }}" autocomplete="first_name" autofocus required>
-                                    <label for="first_name" class="form-control-placeholder-floating">First Name</label>
+        <?php try { ?>
+            @if($user = Auth::user())
+                <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <center style="margin-bottom: 30px;">
+                                @auth
+                                    @if(Auth::user()->Profile->profile_picture === null)
+                                        <img src="{{ URL::to('/') }}/images/profile_images/default.png" class="img-thumbnail" alt="{{ $user->Profile->profile_picture }}" width="275px" height="275px">
+                                    @else
+                                        <img id="preview" src="{{ URL::to('/') }}/images/profile_images/{{ $user->Profile->profile_picture }}" class="img-thumbnail" alt="{{ $user->Profile->profile_picture }}" width="275px" height="275px">
+                                    @endif
+                                @endauth
+                                <input type="file" id="profile_img" name="profile_img" class="form-control-file mb-sm-3 mt-md-2">
+                                <input type="hidden" id="image_name" name="image_name" />
+                            </center>
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group-floating">
+                                        <input id="first_name" type="text" class="form-control" name="first_name" value="{{ $user->Profile->first_name }}" autocomplete="first_name" autofocus required>
+                                        <label for="first_name" class="form-control-placeholder-floating">First Name</label>
+                                    </div>
+                                    <div class="form-group-floating">
+                                        <input id="last_name" type="text" class="form-control" name="last_name" value="{{ $user->Profile->last_name }}" required>
+                                        <label for="last_name" class="form-control-placeholder-floating">Last Name</label>
+                                    </div>
                                 </div>
-                                <div class="form-group-floating">
-                                    <input id="last_name" type="text" class="form-control" name="last_name" value="{{ $user->last_name }}" required>
-                                    <label for="last_name" class="form-control-placeholder-floating">Last Name</label>
+                                <div class="col-md-6">
+                                    <div class="form-group-floating">
+                                        <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ $user->Profile->middle_name }}" required>
+                                        <label for="middle_name" class="form-control-placeholder-floating">Middle Name</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group-floating">
-                                    <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ $user->middle_name }}" required>
-                                    <label for="middle_name" class="form-control-placeholder-floating">Middle Name</label>
+                            <div class="form-group-floating">
+                                <input id="address" type="text" class="form-control" name="address" value="{{ $user->Profile->address }}" required>
+                                <label for="address" class="form-control-placeholder-floating">Address</label>
+                            </div>
+                            <div class="form-group-floating">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" autocomplete="email" required>
+                                <label for="email" class="form-control-placeholder-floating">Email</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group-floating">
+                                        <input id="contact_number" type="text" class="form-control" name="contact_number" value="{{ $user->Profile->contact_number }}" required>
+                                        <label for="contact_number" class="form-control-placeholder-floating">Contact Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" id="birth_date" name="birth_date" class="form-control" value="{{ $user->Profile->birth_date->format('Y-m-d') }}">
+                                    <label for="birth_date" class="form-control-placeholder-floating">Birth Date</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group-floating">
-                            <input id="address" type="text" class="form-control" name="address" value="{{ $user->address }}" required>
-                            <label for="address" class="form-control-placeholder-floating">Address</label>
-                        </div>
-                        <div class="form-group-floating">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" autocomplete="email" required>
-                            <label for="email" class="form-control-placeholder-floating">Email</label>
-                        </div>
-                        <div class="form-group-floating">
-                            <input id="contact" type="text" class="form-control" name="contact" value="{{ $user->contact_number }}" required>
-                            <label for="contact" class="form-control-placeholder-floating">Contact Number</label>
-                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <textarea id="description" name="description" class="form-control" required maxlength="250" style="resize: none; height: 80px;">{{ $user->description }}</textarea>
-                        <label for="description" class="form-control-placeholder-floating">Description</label>
-                        <div class="fa-pull-right">
-                            <p id="charNum" class="lead">250</p>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-sm btn-outline-secondary">
-                    <i class="fa fa-edit mr-1"></i>
-                    Update
-                </button>
-            </form>
-        @endif
+                    <button type="submit" class="btn btn-sm btn-outline-secondary fa-pull-right">
+                        <i class="fa fa-edit mr-1"></i>
+                        Update
+                    </button>
+                </form>
+            @endif
+        <?php } catch (ErrorException $e) {?>
+            <div class="display-4">
+                You haven't created your Profile yet, click <a href="{{ action('UserProfileController@create', $user->id) }}">here</a> to create one.
+            </div>
+        <?php } ?>
     </div>
 @endsection

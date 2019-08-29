@@ -49,8 +49,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,12 +63,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = 1; // automatic for new users to have the basic role. "Manage their projects"
+        $role = 7; // 1 for new users to have the basic role. "Manage their projects" 7 is the highest of them all. the admin.
 
         return User::create([
-            'first_name' => $data['first_name'],
-            'middle_name' => $data['middle_name'],
-            'last_name' => $data['last_name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $role

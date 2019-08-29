@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c4f3c21-c3da-42af-8f25-f8586454c210" name="Default Changelist" comment="">
+    <list default="true" id="7c4f3c21-c3da-42af-8f25-f8586454c210" name="Default Changelist" comment="updates">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/captcha.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2019_08_29_152811_create_users_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2019_08_29_152911_create_profiles_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2019_08_29_152933_create_projects_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/profile_images/1567100732.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/profile_images/1567101569.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/profile_images/1567101987.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/profile_images/1567102269.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/profile/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/wd-portfolio.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wd-portfolio.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SendEmailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SendEmailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cms/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cms/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cms/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cms/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cms/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cms/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cms/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cms/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/base.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/base.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/main/sendemail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/main/sendemail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/profile/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profile/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -154,6 +188,7 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-diactoros" />
       <path value="$PROJECT_DIR$/vendor/twbs/bootstrap" />
+      <path value="$PROJECT_DIR$/vendor/anhskohbo/no-captcha" />
     </include_path>
   </component>
   <component name="ProjectId" id="1P0kjRIeafcjFQdi5zqYOi5gjTR" />
@@ -161,10 +196,12 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../rx-sites/rxcms" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../crud-app" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -199,6 +236,16 @@
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -278,7 +325,9 @@
       <workItem from="1565365273483" duration="184000" />
       <workItem from="1566482382562" duration="3468000" />
       <workItem from="1566808138122" duration="2500000" />
-      <workItem from="1566920709105" duration="530000" />
+      <workItem from="1566920709105" duration="914000" />
+      <workItem from="1567091773490" duration="203000" />
+      <workItem from="1567092172407" duration="11427000" />
     </task>
     <task id="LOCAL-00001" summary="Dashboard implemented, Minor Changes.">
       <created>1561882443640</created>
@@ -399,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566485247715</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="updates">
+      <created>1566921356909</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1566921356909</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -442,6 +498,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$/Web-Developer-Portfolio" />
     </ignored-roots>

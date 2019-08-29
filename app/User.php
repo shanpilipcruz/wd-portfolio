@@ -11,22 +11,11 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable, SoftDeletes;
-    public function dashboard()
-    {
-        return $this->hasOne('App/Profile');
-    }
 
     protected $fillable = [
-        'first_name',
-        'middle_name',
-        'last_name',
+        'username',
         'email',
         'password',
-        'role',
-        'profile_img',
-        'address',
-        'description',
-        'contact_number'
     ];
 
     protected $dates = ['deleted_at'];
@@ -48,4 +37,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
+
+    public function Project()
+    {
+        return $this->hasMany('App\Project');
+    }
 }

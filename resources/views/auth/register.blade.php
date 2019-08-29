@@ -12,28 +12,9 @@
                         @csrf
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
-                                    <label for="first_name" class="form-control-placeholder-floating flat">{{ __('First Name') }}</label>
-                                    @if ($errors->has('first_name'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <input id="middle_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="middle_name" value="{{ old('middle_name') }}" required autocomplete="middle_name">
-                                    <label for="middle_name" class="form-control-placeholder-floating flat">{{ __('Middle Name') }}</label>
-                                    @if ($errors->has('middle_name'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('middle_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-
                                 <div class="col-md-12 mb-3">
-                                    <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name">
-                                    <label for="last_name" class="form-control-placeholder-floating flat">{{ __('Last Name') }}</label>
+                                    <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autocomplete="username">
+                                    <label for="username" class="form-control-placeholder-floating flat">{{ __('Username') }}</label>
 
                                     @if ($errors->has('last_name'))
                                         <span class="invalid-feedback" role="alert">

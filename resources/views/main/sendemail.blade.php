@@ -55,6 +55,14 @@
                                 </span>
                                 <textarea name="message" class="form-control" placeholder="Enter Your Message" data-toggle="tooltip" title="Enter your Message" data-placement="right" required></textarea>
                             </div>
+                            <div class="form-group">
+                                {!! NoCaptcha::display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                    <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                </span>
+                                @endif
+                            </div>
                     </div>
                     <div class="modal-footer">
                             <input type="submit" name="send" class="btn btn-outline-secondary" value="Send" />

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -49,23 +49,23 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ProjectName' => 'required',
-            'ProjectDescription' => 'required',
-            'ProjectAuthor' => 'required',
-            'ProjectLink' => 'required',
-            'upload_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'project_name' => 'required',
+            'project_description' => 'required',
+            'project_author' => 'required',
+            'project_link' => 'required',
+            'project_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $image = $request->file('upload_image');
+        $image = $request->file('project_image');
 
         $newName = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images/project_images'), $newName);
         $formData = array(
-            'ProjectName' => $request->ProjectName,
-            'ProjectDescription' => $request->ProjectDescription,
-            'ProjectAuthor' => $request->ProjectAuthor,
-            'ProjectLink' => $request->ProjectLink,
-            'ProjectImage' => $newName
+            'project_name' => $request['project_name'],
+            'project_description' => $request['project_description'],
+            'project_author' => $request['project_author'],
+            'project_link' => $request['project_link'],
+            'project_image' => $newName
         );
 
         Project::create($formData);
@@ -106,41 +106,41 @@ class DashboardController extends Controller
     public function update(Request $request, $id)
     {
         $image_name = $request->hidden_image;
-        $image = $request->file('ProjectImage');
+        $image = $request->file('project_image');
         if($image != '') {
             $request->validate([
-                'ProjectName' => 'required',
-                'ProjectDescription' => 'required',
-                'ProjectAuthor' => 'required',
-                'ProjectLink' => 'required',
-                'upload_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'project_name' => 'required',
+                'project_description' => 'required',
+                'project_author' => 'required',
+                'project_link' => 'required',
+                'project_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/project_images/'), $image_name);
-        } elseif($request->get('ProjectName') === $request->get('existingProjectName') &&
-            $request->get('ProjectDescription') === $request->get('existingProjectDescription') &&
-            $request->get('ProjectAuthor') === $request->get('existingProjectAuthor') &&
-            $request->get('upload_image') === $request->get('existingProjectImage') &&
-            $request->get('ProjectLink') === $request->get('existingProjectLink')) {
+        } elseif($request->get('project_name') === $request['project_name'] &&
+            $request->get('project_description') === $request['project_description'] &&
+            $request->get('project_author') === $request['project_author'] &&
+            $request->get('project_link') === $request['project_link'] &&
+            $request->get('project_image') === $request['project_image']) {
             return redirect()->back()->with('warning', 'No changes has been detected!');
         } else {
             $ExistingProjectImage = $request->get('existingProjectImage');
             $request->validate([
-                'ProjectName' => 'required',
-                'ProjectDescription' => 'required',
-                'ProjectAuthor' => 'required',
-                'ProjectLink' => 'required'
+                'project_name' => 'required',
+                'project_description' => 'required',
+                'project_author' => 'required',
+                'project_link' => 'required'
             ]);
             $image_name = $ExistingProjectImage;
         }
 
         $form_data = array(
-            'ProjectName'  =>   $request->ProjectName,
-            'ProjectDescription'  =>   $request->ProjectDescription,
-            'ProjectAuthor'  =>   $request->ProjectAuthor,
-            'ProjectLink' => $request->ProjectLink,
-            'ProjectImage'  =>   $image_name
+            'project_name'  =>   $request['project_name'],
+            'project_description'  =>   $request['project_description'],
+            'project_author'  =>   $request['project_author'],
+            'project_link' => $request['project_link'],
+            'project_image'  =>   $image_name
         );
 
         Project::whereId($id)->update($form_data);
@@ -161,7 +161,7 @@ class DashboardController extends Controller
 
     public function showUsers()
     {
-        $userData = DB::table('users')->orderBy('id', 'asc')->get();
+        $userData = User::orderBy('id')->get();
         return view('cms.users', compact('userData'));
     }
 }

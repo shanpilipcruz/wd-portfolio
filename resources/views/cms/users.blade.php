@@ -15,11 +15,15 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <center>
-                                    @if($usersData->profile_img === null)
-                                        <img class="img-thumbnail" src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" height="150px" width="150px">
-                                    @else
-                                        <img class="img-thumbnail" src="{{ url('/') }}/images/profile_images/{{ $usersData->profile_img }}" alt="{{ $usersData->profile_img }}" height="150px" width="150px">
-                                    @endif
+                                    <?php try { ?>
+                                        @if($usersData->Profile->profile_picture === null)
+                                            <img class="img-thumbnail" src="{{ url('/') }}/images/profile_images/default.png" alt="default.png" height="150px" width="150px">
+                                        @else
+                                            <img class="img-thumbnail" src="{{ url('/') }}/images/profile_images/{{ $usersData->Profile->profile_picture }}" alt="{{ $usersData->Profile->profile_picture }}" height="150px" width="150px">
+                                        @endif
+                                    <?php } catch (ErrorException $e) {?>
+
+                                    <?php } ?>
                                 </center>
                                 <br>
                             </div>
@@ -32,9 +36,9 @@
                                                     <i class="fa fa-user"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" id="first_name" name="first_name" class="form-control" readonly value="{{ $usersData->first_name }}" data-toggle="tooltip" data-placement="top" title="First Name">
-                                            <input type="text" id="middle_name" name="middle_name" class="form-control" readonly value="{{ $usersData->middle_name }}" data-toggle="tooltip" data-placement="top" title="Middle Name">
-                                            <input type="text" id="last_name" name="last_name" class="form-control" readonly value="{{ $usersData->last_name }}" data-toggle="tooltip" data-placement="top" title="Last Name">
+                                            <input type="text" id="first_name" name="first_name" class="form-control" readonly value="{{ $usersData->Profile->first_name }}" data-toggle="tooltip" data-placement="top" title="First Name">
+                                            <input type="text" id="middle_name" name="middle_name" class="form-control" readonly value="{{ $usersData->Profile->middle_name }}" data-toggle="tooltip" data-placement="top" title="Middle Name">
+                                            <input type="text" id="last_name" name="last_name" class="form-control" readonly value="{{ $usersData->Profile->last_name }}" data-toggle="tooltip" data-placement="top" title="Last Name">
                                         </div>
                                         <br>
                                         <div class="input-group">
@@ -52,10 +56,10 @@
                                                     <i class="fa fa-home"></i>
                                                 </span>
                                             </div>
-                                            @if($usersData->address == null)
+                                            @if($usersData->Profile->address == null)
                                                 <input type="text" id="address" class="form-control" readonly data-toggle="tooltip" data-placement="right" title="Address">
-                                            @elseif($usersData->address != null)
-                                                <input type="text" id="address" class="form-control" readonly value="{{ $usersData->address }}" data-toggle="tooltip" data-placement="right" title="Address">
+                                            @elseif($usersData->Profile->address != null)
+                                                <input type="text" id="address" class="form-control" readonly value="{{ $usersData->Profile->address }}" data-toggle="tooltip" data-placement="right" title="Address">
                                             @endif
                                         </div>
                                         <br>
@@ -65,24 +69,20 @@
                                                     <i class="fa fa-phone-alt"></i>
                                                 </span>
                                             </div>
-                                            @if($usersData->contact_number == null)
+                                            @if($usersData->Profile->contact_number == null)
                                                 <input type="text" id="contact_number" class="form-control" readonly data-toggle="tooltip" data-placement="right" title="Contact">
-                                            @elseif($usersData->contact_number != null)
-                                                <input type="text" id="contact_number" class="form-control" readonly value="{{ $usersData->contact_number }}" data-toggle="tooltip" data-placement="right" title="Contact">
+                                            @elseif($usersData->Profile->contact_number != null)
+                                                <input type="text" id="contact_number" class="form-control" readonly value="{{ $usersData->Profile->contact_number }}" data-toggle="tooltip" data-placement="right" title="Contact Number">
                                             @endif
                                         </div>
                                         <br>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-user-edit"></i>
+                                                    <i class="fa fa-birthday-cake"></i>
                                                 </span>
                                             </div>
-                                            @if($usersData->description == null)
-                                                <input type="text" id="description" class="form-control" readonly data-toggle="tooltip" data-placement="right" title="Description">
-                                            @elseif($usersData->description != null)
-                                                <input type="text" id="description" class="form-control" readonly value="{{ $usersData->description }}" data-toggle="tooltip" data-placement="right" title="Description">
-                                            @endif
+                                            <input type="date" id="birth_date" name="birth_date" class="form-control" readonly value="{{ $usersData->Profile->birth_date->format('Y-m-d') }}" data-toggle="tooltip" data-placement="right" title="Birthday">
                                         </div>
                                     </div>
                                 </div>
@@ -114,11 +114,11 @@
             @foreach($userData as $users)
             <tbody>
                 <tr>
-                    <td>{{ $users->first_name }}</td>
-                    <td>{{ $users->middle_name }}</td>
-                    <td>{{ $users->last_name }}</td>
-                    <td>{{ $users->email }}</td>
-                    <td>{{ $users->address }}</td>
+                    <td>{{ $users->Profile->first_name }}</td>
+                    <td>{{ $users->Profile->middle_name }}</td>
+                    <td>{{ $users->Profile->last_name }}</td>
+                    <td>{{ $users->Profile->email }}</td>
+                    <td>{{ $users->Profile->address }}</td>
                     <td class="text-center">
                         @if($loggedUser = auth()->user())
                             @if($loggedUser->id === $users->id)
